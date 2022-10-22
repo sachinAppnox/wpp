@@ -7,6 +7,9 @@ import store from './src/Redux/Store';
 import DashBoard from './src/Screen/DashBoard/DashBoard';
 import { en, hi } from './src/Component/LocalizedString/LocalizedString';
 
+
+
+
 export default function App() {
   let [fontLoaded] = useFonts({
     "ProductSans-BlackItalic": require('./assets/fonts/ProductSans-BlackItalic.ttf'),
