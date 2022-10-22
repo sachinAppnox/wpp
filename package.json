@@ -1,0 +1,40 @@
+{
+  "name": "interview_task",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-navigation/drawer": "^6.3.1",
+    "@react-navigation/material-bottom-tabs": "^6.2.4",
+    "@react-navigation/native": "^6.0.13",
+    "@react-navigation/native-stack": "^6.5.0",
+    "@react-navigation/stack": "^6.1.1",
+    "expo": "~46.0.13",
+    "expo-cli": "^6.0.6",
+    "expo-font": "~10.2.0",
+    "expo-linear-gradient": "^11.4.0",
+    "expo-localization": "~13.0.0",
+    "expo-status-bar": "~1.3.0",
+    "expo-updates": "~0.14.6",
+    "i18n-js": "^3.9.2",
+    "react": "18.0.0",
+    "react-native": "0.69.6",
+    "react-native-paper": "^4.12.5",
+    "react-native-reanimated": "~2.9.1",
+    "react-native-safe-area-view": "^1.1.1",
+    "react-native-size-matters": "^0.4.0",
+    "react-native-swiper": "^1.6.0",
+    "react-native-vector-icons": "^9.2.0",
+    "react-redux": "^8.0.4",
+    "redux": "^4.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9"
+  },
+  "private": true
+}
