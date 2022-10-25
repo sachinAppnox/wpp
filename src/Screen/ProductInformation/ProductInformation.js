@@ -3,14 +3,18 @@ import React from 'react'
 import { moderateScale, scale } from 'react-native-size-matters'
 import { grey, h4, iconSize, lightFont, mainColor, mediumFont, mediumText, semiBoldFont } from '../../Component/DesignTheme'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { useSelector } from 'react-redux'
 
-const ProductInformation = () => {
+const ProductInformation = ({route}) => {
+    const productData=useSelector((state)=>state.ProductInformationReducer)
+
+    console.log(productData,'------------')
     return (
         <View style={styles.conatiner}>
             {
                 //#region param product Image
                 <View style={styles.imageConatiner}>
-                    <Image source={{ uri: 'https://www.licious.in/blog/wp-content/uploads/2022/03/Classic-Egg.jpg' }} style={{ height: '100%', width: '100%' }} />
+                    <Image source={require('../../../assets/ProductImages/c.jpeg')} style={{ height: '100%', width: '100%' }} />
                 </View>
                 //#endregion
             }
@@ -19,7 +23,7 @@ const ProductInformation = () => {
                 //#region  product Image
                 <>
                     <View style={{marginTop:scale(10),flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-                        <Text style={styles.productName}>Badly Egg</Text>
+                        <Text style={styles.productName}>Badly Staebery</Text>
                         <Text style={styles.price}>85 L.E/30 Pices Plate</Text>
                     </View>
 

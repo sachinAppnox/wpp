@@ -87,16 +87,16 @@ export default function DashBoard() {
 
     
     const data = [
-        { name: 'Fruit', id: 1 },
-        { name: 'VegeTable', id: 2 },
-        { name: 'Rustic BreakFast', id: 3 },
-        { name: 'Fruit', id: 4 },
-        { name: 'Fruit', id: 5 },
-        { name: 'Fruit', id: 6 },
-        { name: 'Fruit', id: 6 },
-        { name: 'Fruit', id: 6 },
-        { name: 'Fruit', id: 6 },
-        { name: 'Fruit', id: 6 },
+        { name: 'Fruit', id: 1,img:require('../../../assets/ProductImages/A.jpeg')},
+        { name: 'VegeTable', id: 2 ,img:require('../../../assets/ProductImages/b.jpeg')},
+        { name: 'Rustic BreakFast', id: 3,img:require('../../../assets/ProductImages/c.jpeg')},
+        { name: 'Fruit', id: 4,img:require('../../../assets/ProductImages/d.jpeg') },
+        { name: 'Fruit', id: 5 ,img:require('../../../assets/ProductImages/e.jpeg')},
+        { name: 'Fruit', id: 6,img:require('../../../assets/ProductImages/f.jpeg')},
+        { name: 'Fruit', id: 7,img:require('../../../assets/ProductImages/g.jpeg')},
+        { name: 'Fruit', id: 8,img:require('../../../assets/ProductImages/h.jpeg')},
+        { name: 'Fruit', id: 9,img:require('../../../assets/ProductImages/i.jpeg')},
+        { name: 'Fruit', id:10,img:require('../../../assets/ProductImages/j.jpeg')}
     ]
 
     return (
@@ -122,17 +122,21 @@ export default function DashBoard() {
         <View style={{ width: '90%', alignSelf: 'center', }}>
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{height:moderateScale(130),width:moderateScale(130),alignSelf:"center"}}>
-                <Image source={{uri:'https://t3.ftcdn.net/jpg/01/74/77/10/360_F_174771091_vawZDnwPc4cBiit579V6FPpWhcrC2hQo.jpg'}} style={{height:"100%",width:"100%"}}/>
+                <Image source={require('../../../assets/index.jpeg')} style={{height:"100%",width:"100%"}} resizeMode='contain'/>
             </View>
-                {data.map((index)=>{
+                {data.map((item,index)=>{
                     return(
                         <TouchableOpacity key={Math.random()} onPress={()=>navigation.navigate('CategoryTypeList')}
                         style={{
                            borderWidth: 1, borderColor: danger, marginVertical: moderateScale(10), height: moderateScale(100), borderRadius: moderateScale(6),
                            flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", paddingHorizontal: scale(10)
                        }}>
-                           <Image source={{ uri:'https://t4.ftcdn.net/jpg/02/75/80/29/360_F_275802958_kyNUhZaZFcscm3v4vJHFNP9a8O6xm03N.jpg' }} style={{ height: moderateScale(60), width: moderateScale(100) }} />
-                           <Text style={{ fontFamily: mediumFont, fontSize: mediumText }}>{i18n.t('name')}</Text>
+                        <View style={{height: moderateScale(60), width: moderateScale(100) }}>
+                           <Image source={item.img} style={{ height:'100%', width:'100%' }} resizeMode='contain'/>
+                           </View>
+                           {/* <Text style={{ fontFamily: mediumFont, fontSize: mediumText }}>{i18n.t('name')}</Text> */}
+                           <Text style={{ fontFamily: mediumFont, fontSize: mediumText }}>{item.name}</Text>
+
                        </TouchableOpacity>
                     )
                 })}

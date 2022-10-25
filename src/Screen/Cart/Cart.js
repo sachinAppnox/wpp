@@ -20,16 +20,16 @@ const Cart = () => {
 
 
   const data = [
-    { name: 'Fruit', id: 1 },
-    { name: 'VegeTable', id: 2 },
-    { name: 'Rustic BreakFast', id: 3 },
-    { name: 'Fruit', id: 4 },
-    { name: 'Fruit', id: 5 },
-    { name: 'Fruit', id: 6 },
-    { name: 'Fruit', id: 6 },
-    { name: 'Fruit', id: 6 },
-    { name: 'Fruit', id: 6 },
-    { name: 'Fruit', id: 6 },
+    { name: 'Fruit', id: 1, img: require('../../../assets/ProductImages/A.jpeg') },
+    { name: 'VegeTable', id: 2, img: require('../../../assets/ProductImages/b.jpeg') },
+    { name: 'Rustic BreakFast', id: 3, img: require('../../../assets/ProductImages/c.jpeg') },
+    { name: 'Fruit', id: 4, img: require('../../../assets/ProductImages/d.jpeg') },
+    { name: 'Fruit', id: 5, img: require('../../../assets/ProductImages/e.jpeg') },
+    { name: 'Fruit', id: 6, img: require('../../../assets/ProductImages/f.jpeg') },
+    { name: 'Fruit', id: 7, img: require('../../../assets/ProductImages/g.jpeg') },
+    { name: 'Fruit', id: 8, img: require('../../../assets/ProductImages/h.jpeg') },
+    { name: 'Fruit', id: 9, img: require('../../../assets/ProductImages/i.jpeg') },
+    { name: 'Fruit', id: 10, img: require('../../../assets/ProductImages/j.jpeg') }
   ]
 
 
@@ -46,35 +46,34 @@ const Cart = () => {
   }, [])
 
   return (
-    <View style={{ flex: 1 ,backgroundColor:white}}>
+    <View style={{ flex: 1, backgroundColor: white }}>
       <ScrollView>
-        <View style={{marginBottom:scale(30)}}>
+        <View style={{ marginBottom: scale(30) }}>
           {data != undefined && data.map((item, i) => {
-            console.log(item.price, '----------------')
             return (
               <View key={i} style={styles.CartCard}>
                 <View style={styles.img}>
-                  <Image source={{uri:'https://img.freepik.com/free-photo/flat-lay-batch-cooking-composition_23-2148765597.jpg?w=2000'}} style={{ height: '100%', width: '100%' }} resizeMode='cover' />
+                  <Image source={item.img} style={{ height: '100%', width: '100%' }} resizeMode='cover' />
                 </View>
-                <View style={{width:'70%',height:'80%',justifyContent:'space-between',paddingStart:moderateScale(5)}}>
-                <View style={{}}>
-                        <Text style={styles.productName}>Badly Egg</Text>
-                        <Text style={styles.price}>85 L.E/30 Pices Plate</Text>
+                <View style={{ width: '70%', height: '80%', justifyContent: 'space-between', paddingStart: moderateScale(5) }}>
+                  <View style={{}}>
+                    <Text style={styles.productName}>{item.name}</Text>
+                    <Text style={styles.price}>85 L.E/30 Pices Plate</Text>
+                  </View>
+
+                  <View style={styles.Cart}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      <TouchableOpacity style={{ marginRight: scale(5) }}>
+                        <AntDesign name='minuscircleo' size={iconSize - 5} color={grey} />
+                      </TouchableOpacity>
+                      <Text style={[styles.price, { color: '#000', fontFamily: semiBoldFont, fontSize: mediumText + 2, color: mainColor }]}>0</Text>
+                      <TouchableOpacity style={styles.btn}>
+                        <AntDesign name='pluscircleo' size={iconSize - 3} color={grey} />
+                      </TouchableOpacity>
                     </View>
 
-                    <View style={styles.Cart}>
-                        <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <TouchableOpacity style={{marginRight:scale(5)}}>
-                            <AntDesign name='minuscircleo' size={iconSize-5} color={grey} />
-                        </TouchableOpacity>
-                        <Text style={[styles.price,{color:'#000',fontFamily:semiBoldFont,fontSize:mediumText+2,color:mainColor}]}>0</Text>
-                        <TouchableOpacity style={styles.btn}>
-                            <AntDesign name='pluscircleo' size={iconSize-3} color={grey} />
-                        </TouchableOpacity>
-                        </View>
-
-                        <Text style={styles.qunatity}><Text style={{ color: mainColor }}>85</Text> <Text>L.E</Text></Text>
-                    </View>
+                    <Text style={styles.qunatity}><Text style={{ color: mainColor }}>85</Text> <Text>L.E</Text></Text>
+                  </View>
                 </View>
               </View>
             )
@@ -83,25 +82,25 @@ const Cart = () => {
           {data.length == 0 &&
             <View style={{ height: moderateScale(300), width: scale(300), alignSelf: 'center', marginTop: scale(100) }}>
               <Image source={require('../../../assets/Carasol/NoDat.png')} resizeMode='cover' style={{ heght: "100%", width: '100%' }} />
-              <Text style={{ fontFamily: lightFont, fontSize: normalText+ 10, color: danger, textAlign: 'center' }}>No Data in Cart</Text>
+              <Text style={{ fontFamily: lightFont, fontSize: normalText + 10, color: danger, textAlign: 'center' }}>No Data in Cart</Text>
             </View>}
 
-            {//#region product price information Detail
-            <View style={{borderWidth:1,width:'90%',alignSelf:'center',marginVertical:scale(10),borderColor:'#efefef',paddingVertical:moderateScale(5)}}>
-                <View style={styles.priceInfo}>
-                  <Text style={styles.priceDetail}>Price</Text>
-                  <Text style={styles.qunatity}><Text style={{ color:dark }}>85</Text> <Text style={{color:'grey'}}>L.E</Text></Text>
-                </View>
+          {//#region product price information Detail
+            <View style={{ borderWidth: 1, width: '90%', alignSelf: 'center', marginVertical: scale(10), borderColor: '#efefef', paddingVertical: moderateScale(5) }}>
+              <View style={styles.priceInfo}>
+                <Text style={styles.priceDetail}>Price</Text>
+                <Text style={styles.qunatity}><Text style={{ color: dark }}>85</Text> <Text style={{ color: 'grey' }}>L.E</Text></Text>
+              </View>
 
-                <View style={styles.priceInfo}>
-                  <Text style={styles.priceDetail}>Delivery</Text>
-                  <Text style={styles.qunatity}><Text style={{ color:dark }}>85</Text> <Text style={{color:'grey'}}>L.E</Text></Text>
-                </View>
+              <View style={styles.priceInfo}>
+                <Text style={styles.priceDetail}>Delivery</Text>
+                <Text style={styles.qunatity}><Text style={{ color: dark }}>85</Text> <Text style={{ color: 'grey' }}>L.E</Text></Text>
+              </View>
 
-                <View style={styles.priceInfo}>
-                  <Text style={styles.priceDetail}>Total</Text>
-                  <Text style={styles.qunatity}><Text style={{ color:dark }}>85</Text> <Text style={{color:'grey'}}>L.E</Text></Text>
-                </View>
+              <View style={styles.priceInfo}>
+                <Text style={styles.priceDetail}>Total</Text>
+                <Text style={styles.qunatity}><Text style={{ color: dark }}>85</Text> <Text style={{ color: 'grey' }}>L.E</Text></Text>
+              </View>
             </View>
             //#endregion
           }
@@ -133,9 +132,9 @@ const styles = StyleSheet.create({
     borderColor: '#efefef',
     overflow: "hidden",
     flexDirection: "row",
-    alignItems:'center',
-    justifyContent:'space-between',
-    paddingHorizontal:scale(10)
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: scale(10)
   },
   img: {
     height: moderateScale(90),
@@ -154,40 +153,40 @@ const styles = StyleSheet.create({
     fontSize: normalText + 5,
     fontFamily: semiBoldFont
   },
-  Cart:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between'
+  Cart: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
-  btn:{
-    marginHorizontal:scale(5)
-},
-productName:{
-  fontSize:mediumText+2,
-  paddingVertical:scale(3)
-},
-price:{
-  color:grey,
-  fontFamily:lightFont
-},
-priceInfo:{
-  flexDirection:'row',
-justifyContent:'space-between',
-paddingHorizontal:scale(7),
-},
-priceDetail:{fontFamily:mediumFont,fontSize:mediumText,color:grey,paddingVertical:moderateScale(5)},
-confirmButton:{
-  width:'90%',
-  alignItems:'center',
-  alignSelf:'center',
-  backgroundColor:mainColor,
-  paddingVertical:moderateScale(10),
-  borderRadius:8
-},
-btnText:{
-  color:white,
-  fontFamily:mediumFont,
-  fontSize:mediumText+3
-}
+  btn: {
+    marginHorizontal: scale(5)
+  },
+  productName: {
+    fontSize: mediumText + 2,
+    paddingVertical: scale(3)
+  },
+  price: {
+    color: grey,
+    fontFamily: lightFont
+  },
+  priceInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: scale(7),
+  },
+  priceDetail: { fontFamily: mediumFont, fontSize: mediumText, color: grey, paddingVertical: moderateScale(5) },
+  confirmButton: {
+    width: '90%',
+    alignItems: 'center',
+    alignSelf: 'center',
+    backgroundColor: mainColor,
+    paddingVertical: moderateScale(10),
+    borderRadius: 8
+  },
+  btnText: {
+    color: white,
+    fontFamily: mediumFont,
+    fontSize: mediumText + 3
+  }
 });
 export default Cart

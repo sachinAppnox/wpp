@@ -6,27 +6,50 @@ import { grey, h4, iconSize, lightFont, mainColor, mediumFont, mediumText, semiB
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { color } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 const CategoryTypeList = () => {
     const navigation=useNavigation()
+    const distpatch=useDispatch()
+    const data = [
+        { name: 'Fruit', id: 1,img:require('../../../assets/ProductImages/A.jpeg')},
+        { name: 'VegeTable', id: 2 ,img:require('../../../assets/ProductImages/b.jpeg')},
+        { name: 'Rustic BreakFast', id: 3,img:require('../../../assets/ProductImages/c.jpeg')},
+        { name: 'Fruit', id: 4,img:require('../../../assets/ProductImages/d.jpeg') },
+        { name: 'Fruit', id: 5 ,img:require('../../../assets/ProductImages/e.jpeg')},
+        { name: 'Fruit', id: 6,img:require('../../../assets/ProductImages/f.jpeg')},
+        { name: 'Fruit', id: 7,img:require('../../../assets/ProductImages/g.jpeg')},
+        { name: 'Fruit', id: 8,img:require('../../../assets/ProductImages/h.jpeg')},
+        { name: 'Fruit', id: 9,img:require('../../../assets/ProductImages/i.jpeg')},
+        { name: 'Fruit', id:10,img:require('../../../assets/ProductImages/j.jpeg')}
+    ]
   return (
         <View style={{flex:1,backgroundColor:"#fafafa"}}>
             {//#region product List Start
                     <View style={{width:"95%",alignSelf:"center"}}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={{width:'100%',flexDirection:'row',flexWrap:'wrap'}}>
-                        {[1,1,1,1,1,1,1,1,1,1,].map((d,i)=>{
+                        {data.map((d,i)=>{
+                            // console.log(d)
                             return(
-                                <TouchableOpacity onPress={()=>navigation.navigate('ProductInformation')} style={styles.card}>
+                                <TouchableOpacity 
+                                onPress={()=>{
+                                    distpatch({
+                                        type:'Product_Information',
+                                        payload:d
+                                    })
+                                    navigation.navigate('ProductInformation',{product:d})} 
+                                }
+                                style={styles.card}>
                                     {/* //#region product image */}
                                     <View style={styles.imageConatiner}>
-                                    <Image source={{uri:'https://www.licious.in/blog/wp-content/uploads/2022/03/Classic-Egg.jpg'}} style={{ height: '100%', width: '100%' }} />
+                                    <Image source={d.img} style={{ height: '100%', width: '100%' }} />
                                     </View>
 
                                     {/* product details */}
                                     <View>
-                                        <Text style={styles.productName}>Badly Egg</Text>
+                                        <Text style={styles.productName}>{d.name}</Text>
                                         <Text style={styles.price}>85 L.E/30 Pices Plate</Text>
                                         <Text style={styles.qunatity}><Text style={{color:mainColor}}>85</Text> <Text>L.E</Text></Text>
                                     </View>

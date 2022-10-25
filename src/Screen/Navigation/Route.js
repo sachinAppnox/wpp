@@ -21,16 +21,28 @@ import ProductInformation from '../ProductInformation/ProductInformation';
 import Inbox from '../ContactScreens/Inbox';
 import Login from '../Auth/Login';
 import Email from '../ContactScreens/Email';
-
+import call from 'react-native-phone-call';
+import Admin from '../Admin/Admin';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 function CustomDrawerContent(props) {
 
   let [locale, setLocale] = useState(Localization.locale);
+  const [mobileNumber, setmobileNumber] = useState('1233445555')
   i18n.fallbacks = true;
   i18n.translations = { en, hi };
   i18n.locale = locale;
+
+  const triggerCall = () => {
+    const args = {
+      number: mobileNumber,
+      prompt: true
+    }
+    // make call
+    call(args).catch(console.error)
+  }
 
   const onShare = async () => {
     try {
@@ -57,10 +69,10 @@ function CustomDrawerContent(props) {
       <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1, }}>
         <SafeAreaView style={{ flex: 1 }}>
           <View>
-            <View style={{ borderWidth:2, height: moderateScale(100), borderRadius: 300, overflow: 'hidden', width: moderateScale(100), alignSelf: 'center',borderColor:mainColor,alignItems:'center',justifyContent:'center'}}>
+            <View style={{ borderWidth: 2, height: moderateScale(100), borderRadius: 300, overflow: 'hidden', width: moderateScale(100), alignSelf: 'center', borderColor: mainColor, alignItems: 'center', justifyContent: 'center' }}>
               {/* <Image source={require('../../../assets/Carasol/NoDat.png')} style={{ height: '100%', width: '100%' }} /> */}
-              <AntDesign name='user' size={drawerIconSize+30} color={mainColor}/>
-              </View>
+              <AntDesign name='user' size={drawerIconSize + 30} color={mainColor} />
+            </View>
 
             <View style={{ alignItems: 'center', paddingVertical: moderateScale(15) }}>
               <Text style={{ fontSize: headingText }}>Welcome :)</Text>
@@ -68,43 +80,43 @@ function CustomDrawerContent(props) {
 
             <DrawerItemList {...props} />
 
-            <TouchableOpacity onPress={onShare}
+            <TouchableOpacity onPress={triggerCall}
               style={{
-                width:220,
-                  alignSelf:'center',
-                flexDirection:'row',
-                marginTop:moderateScale(5),
-                paddingHorizontal:scale(5)
+                width: 220,
+                alignSelf: 'center',
+                flexDirection: 'row',
+                marginTop: moderateScale(5),
+                paddingHorizontal: scale(5)
               }}
-                >
-                  <MaterialCommunityIcons name="home" color={mainColor} size={drawerIconSize} />
-              <Text style={{marginLeft:moderateScale(30),fontSize:headingText-1,color:grey}}>Call Us</Text>
+            >
+              <Ionicons name="call-outline" color={mainColor} size={drawerIconSize} />
+              <Text style={{ marginLeft: moderateScale(30), fontSize: headingText - 1, color: grey }}>Call Us</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={onShare}
               style={{
-                width:220,
-                  alignSelf:'center',
-                flexDirection:'row',
-                marginTop:moderateScale(15),
-                paddingHorizontal:scale(5)
+                width: 220,
+                alignSelf: 'center',
+                flexDirection: 'row',
+                marginTop: moderateScale(15),
+                paddingHorizontal: scale(5)
               }}
-                >
-                  <MaterialCommunityIcons name="home" color={mainColor} size={drawerIconSize} />
-              <Text style={{marginLeft:moderateScale(30),fontSize:headingText-1,color:grey}}>Share</Text>
+            >
+              <MaterialCommunityIcons name="share-variant" color={mainColor} size={drawerIconSize} />
+              <Text style={{ marginLeft: moderateScale(30), fontSize: headingText - 1, color: grey }}>Share</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
-                   style={{
-                    width:220,
-                          alignSelf:'center',
-                    flexDirection:'row',
-                    marginTop:moderateScale(15),
-                    paddingHorizontal:scale(5)
-                  }}
-            onPress={() => setLocale("en")}>
+            {/* <TouchableOpacity
+              style={{
+                width: 220,
+                alignSelf: 'center',
+                flexDirection: 'row',
+                marginTop: moderateScale(15),
+                paddingHorizontal: scale(5)
+              }}
+              onPress={() => setLocale("en")}>
               <MaterialCommunityIcons name="home" color={mainColor} size={drawerIconSize} />
-              <Text style={{marginLeft:moderateScale(30),fontSize:headingText-1,color:grey}}>Change Language</Text>
-            </TouchableOpacity>
+              <Text style={{ marginLeft: moderateScale(30), fontSize: headingText - 1, color: grey }}>Change Language</Text>
+            </TouchableOpacity> */}
           </View>
 
         </SafeAreaView>
@@ -117,36 +129,36 @@ const DrawerRoute = ({ navigation }) => {
 
   return (
     <PaperProvider>
-      <Drawer.Navigator initialRouteName={i18n.t('name')} drawerContent={(props) => <CustomDrawerContent {...props} />}
+      <Drawer.Navigator initialRouteName={'Home'} drawerContent={(props) => <CustomDrawerContent {...props} />}
         screenOptions={{
-          
+
           drawerLabelStyle: { fontSize: moderateScale(15) },
           drawerType: "front",
           drawerStyle: {
             backgroundColor: '#fff',
-            width:scale(270)
+            width: scale(270)
           },
           drawerActiveTintColor: mainColor,
           drawerActiveBackgroundColor: '#fff'
 
         }}>
+{/* initialRouteName={i18n.t('name')} */}
 
 
 
 
 
 
-
-        <Drawer.Screen name={i18n.t('name')} children={() => <DashBoard />}
+        <Drawer.Screen name={'Home'} children={() => <DashBoard />}
           options={{
             drawerItemStyle: {
-              marginTop:moderateScale(68),
-              width:220,
-              justifyContent:'space-evenly',
-              alignSelf:'center'
+              marginTop: moderateScale(68),
+              width: 220,
+              justifyContent: 'space-evenly',
+              alignSelf: 'center'
             },
 
-            
+
             drawerIcon: () => { return (<MaterialCommunityIcons name="home" color={mainColor} size={drawerIconSize} />) },
 
             gestureEnabled: false,
@@ -163,12 +175,12 @@ const DrawerRoute = ({ navigation }) => {
         <Drawer.Screen name='Inbox' children={() => <Inbox />}
           options={{
             drawerItemStyle: {
-              width:220,
-              justifyContent:'space-evenly',
-              alignSelf:'center',
-              marginTop:-5
+              width: 220,
+              justifyContent: 'space-evenly',
+              alignSelf: 'center',
+              marginTop: -5
             },
-            drawerIcon: () => { return (<MaterialCommunityIcons name="cart" color={mainColor} size={drawerIconSize} />) },
+            drawerIcon: () => { return (<MaterialCommunityIcons name="message-outline" color={mainColor} size={drawerIconSize} />) },
 
             gestureEnabled: false,
             headerRight: () => (
@@ -182,15 +194,15 @@ const DrawerRoute = ({ navigation }) => {
           }}
         />
 
-<Drawer.Screen name='Email' children={() => <Email />}
+        <Drawer.Screen name='Email' children={() => <Email />}
           options={{
             drawerItemStyle: {
-              width:220,
-              justifyContent:'space-evenly',
-              alignSelf:'center',
-              marginTop:-5
+              width: 220,
+              justifyContent: 'space-evenly',
+              alignSelf: 'center',
+              marginTop: -5
             },
-            drawerIcon: () => { return (<MaterialCommunityIcons name="cart" color={mainColor} size={drawerIconSize} />) },
+            drawerIcon: () => { return (<MaterialCommunityIcons name="email-outline" color={mainColor} size={drawerIconSize} />) },
 
             gestureEnabled: false,
             headerRight: () => (
@@ -237,7 +249,7 @@ const DrawerRoute = ({ navigation }) => {
             ),
           }}
         />
-        <Drawer.Screen name='ProductInformation' children={() => <ProductInformation />}
+        <Drawer.Screen name='ProductInformation'  children={() => <ProductInformation />}
           options={{
             gestureEnabled: false,
             drawerItemStyle: {
@@ -256,23 +268,45 @@ const DrawerRoute = ({ navigation }) => {
           }}
         />
 
+        <Drawer.Screen name='Admin' children={() => <Admin/>}
+          options={{
+            gestureEnabled: false,
+            drawerItemStyle: {
+              width: 220,
+              justifyContent: 'space-evenly',
+              alignSelf: 'center',
+              marginTop: -5
+            },
+     
+
+            drawerIcon: () => { return (<AntDesign name="user" color={mainColor} size={moderateScale(18)} />) },
+            headerRight: () => (
+              <TouchableOpacity style={{ marginLeft: scale(10), width: scale(40) }}
+                onPress={() => {
+                  navigation.navigate('CategoryTypeList')
+                }}>
+                <AntDesign name='arrowright' size={iconSize} />
+              </TouchableOpacity>
+            ),
+          }}
+        />
 
         <Drawer.Screen name='Login/Register' children={() => <Login />}
           options={{
             gestureEnabled: false,
             drawerItemStyle: {
               display: "flex",
-              position:'absolute',
-              marginTop:moderateScale(170),
-              width:220,
-              justifyContent:'space-evenly',
-              alignSelf:'center',
-              borderBottomWidth:1,
-              borderTopWidth:1,
-              borderColor:mainColor
+              position: 'absolute',
+              marginTop: moderateScale(170),
+              width: 220,
+              justifyContent: 'space-evenly',
+              alignSelf: 'center',
+              borderBottomWidth: 1,
+              borderTopWidth: 1,
+              borderColor: mainColor
             },
 
-            drawerIcon: () => { return (<AntDesign name="home" color={mainColor} size={drawerIconSize} />) },
+            drawerIcon: () => { return (<AntDesign name="key" color={mainColor} size={drawerIconSize} />) },
             headerRight: () => (
               <TouchableOpacity style={{ marginLeft: scale(10), width: scale(40) }}
                 // onPress={() => {
